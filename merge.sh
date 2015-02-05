@@ -4,15 +4,16 @@ export PAGER=cat
 GIT_USER="$2"
 GIT_PASS="$3"
 
-# Get the URL
-URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
-PUSH_URL="https://${URL:6}"
-echo "Repo url is $PUSH_URL"
-
 CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD | cut -d"," -f3 | cut -d" " -f2 | cut -d")" -f1)
 FROM_BRANCH="dev"
 TO_BRANCH="master"
 echo "current branch is '$CURRENT_BRANCH'"
+
+# Get the URL
+URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
+echo "Repo url is $URL"
+PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
+
 if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     git checkout $FROM_BRANCH && \
 
@@ -26,7 +27,7 @@ if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     echo "Merging changes..." && \
     git merge $FROM_BRANCH && \
     echo "Pushing changes..." && \
-    git push && \
+    git push $PUSH_URL && \
     expect ":" && \
     send "$GIT_USER" && \
     expect ":" && \
