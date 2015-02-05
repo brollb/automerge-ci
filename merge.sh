@@ -1,8 +1,8 @@
 #! /bin/bash
 # Merge pushes to dev to master branch
 export PAGER=cat
-GIT_USER="$2"
-GIT_PASS="$3"
+GIT_USER="$1"
+GIT_PASS="$2"
 
 CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD | cut -d"," -f3 | cut -d" " -f2 | cut -d")" -f1)
 FROM_BRANCH="dev"
@@ -28,10 +28,6 @@ if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     git merge $FROM_BRANCH && \
     echo "Pushing changes..." && \
     git push $PUSH_URL && \
-    expect ":" && \
-    send "$GIT_USER" && \
-    expect ":" && \
-    send "$GIT_PASS" && \
     echo "Merge complete!" || \
     echo "Error Occurred. Merge failed"
 else
