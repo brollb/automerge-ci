@@ -1,6 +1,6 @@
 language: bash
 script: true
-after_success: "./merge.sh"
+after_success: ./merge.sh $GIT_USER $GIT_PASS
 env:
   global:
   - secure: cjSbs+51rGnIQeUV/2ekYdZ3uC+k25i5gQittuULyzJrgXMMmBl1p0T1bbC6f2xVBjKmPb09iO7jRK9wAKheD2DXI+boOXk6kppUrVRsKLGqUMVCweAa9wsdi4u8JoW9mGqJCypl0y5T/b7iJYGvHCJLadsET9mvyYCNHM63GRM=
