@@ -4,6 +4,11 @@ export PAGER=cat
 GIT_USER="$2"
 GIT_PASS="$3"
 
+# Get the URL
+URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
+PUSH_URL="https://${URL:6}"
+echo "Repo url is $PUSH_URL"
+
 CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD | cut -d"," -f3 | cut -d" " -f2 | cut -d")" -f1)
 FROM_BRANCH="dev"
 TO_BRANCH="master"
