@@ -21,7 +21,7 @@ if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     echo "Merging changes..." && \
     git merge $FROM_BRANCH && \
     echo "Pushing changes..." && \
-    spawn git push && \
+    git push && \
     expect ":" && \
     send "$GIT_USER" && \
     expect ":" && \
