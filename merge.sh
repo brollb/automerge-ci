@@ -12,7 +12,8 @@ if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     git checkout $FROM_BRANCH && \
 
     echo "Checking out $TO_BRANCH..." && \
-    git fetch origin $TO_BRANCH&& \
+    git fetch origin $TO_BRANCH:$TO_BRANCH && \
+    git checkout $TO_BRANCH && \
     #git checkout --track origin/$TO_BRANCH && \
     echo "Branches recognized " && \
     git branch -a && \
