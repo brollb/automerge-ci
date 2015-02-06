@@ -10,7 +10,7 @@ GIT_PASS="$2"
 
 # Specify the development branch and stable branch names
 FROM_BRANCH="dev"
-TO_BRANCH="master"
+TO_BRANCH="stable"
 
 # Get the current branch
 export PAGER=cat
