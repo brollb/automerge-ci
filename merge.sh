@@ -1,7 +1,7 @@
 #! /bin/bash
 # Merge pushes to development branch to stable branch
-if [ -n $2 ] ; then
-    echo "Usage:\n ./merge.sh <username> <password>"
+if [ ! -n $2 ] ; then
+    echo "Usage: ./merge.sh <username> <password>"
     exit 1;
 fi
 
