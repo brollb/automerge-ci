@@ -23,13 +23,19 @@ echo "Repo url is $URL"
 PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
 
 if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
-    git checkout $FROM_BRANCH && \
+    # Checkout the dev branch
+    #git checkout $FROM_BRANCH && \
+    #echo "Checking out $TO_BRANCH..." && \
 
-    echo "Checking out $TO_BRANCH..." && \
+    # Checkout the latest stable
     git fetch origin $TO_BRANCH:$TO_BRANCH && \
     git checkout $TO_BRANCH && \
+
+    # Merge the dev into latest stable
     echo "Merging changes..." && \
     git merge $FROM_BRANCH && \
+
+    # Push changes back to remote vcs
     echo "Pushing changes..." && \
     git push $PUSH_URL && \
     echo "Merge complete!" || \
