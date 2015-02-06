@@ -28,10 +28,6 @@ if [ "$CURRENT_BRANCH" = "$FROM_BRANCH" ] ; then
     echo "Checking out $TO_BRANCH..." && \
     git fetch origin $TO_BRANCH:$TO_BRANCH && \
     git checkout $TO_BRANCH && \
-    #git checkout --track origin/$TO_BRANCH && \
-    echo "Branches recognized " && \
-    git branch -a && \
-    git checkout $TO_BRANCH && \
     echo "Merging changes..." && \
     git merge $FROM_BRANCH && \
     echo "Pushing changes..." && \
