@@ -1,15 +1,23 @@
 #! /bin/bash
-# Merge pushes to dev to master branch
-export PAGER=cat
+# Merge pushes to development branch to stable branch
+if [ -n $2 ] ; then
+    echo "Usage:\n ./merge.sh <username> <password>"
+    exit 1;
+fi
+
 GIT_USER="$1"
 GIT_PASS="$2"
 
-CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD | cut -d"," -f3 | cut -d" " -f2 | cut -d")" -f1)
+# Specify the development branch and stable branch names
 FROM_BRANCH="dev"
 TO_BRANCH="master"
+
+# Get the current branch
+export PAGER=cat
+CURRENT_BRANCH=$(git log -n 1 --pretty=%d HEAD | cut -d"," -f3 | cut -d" " -f2 | cut -d")" -f1)
 echo "current branch is '$CURRENT_BRANCH'"
 
-# Get the URL
+# Create the URL to push merge to 
 URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
 echo "Repo url is $URL"
 PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
